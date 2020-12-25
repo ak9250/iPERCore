@@ -5,7 +5,7 @@ spec:
   gpu: True
   cpu: False
 build_steps:
-  - python setup.py develop
+  - python setup.py
   - wget -O assets/checkpoints.zip "https://download.impersonator.org/iper_plus_plus_latest_checkpoints.zip"
   - unzip -o assets/checkpoints.zip -d assets/
   - rm assets/checkpoints.zip
