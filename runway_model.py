@@ -7,8 +7,6 @@ import argparse
 import time
 import sys
 import subprocess
-from IPython.display import HTML
-from base64 import b64encode
 from iPERCore.services import run_imitator
 
 # the gpu ids
