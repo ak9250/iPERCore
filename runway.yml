@@ -5,7 +5,11 @@ spec:
   gpu: True
   cpu: False
 build_steps:
-  - pip install torch torchvision numpy scipy opencv-python tqdm runway-python
+  - apt-get update
+  - apt-get install -y libboost-all-dev
+  - apt-get install -y cmake
+  - apt-get install ffmpeg libsm6 libxext6  -y
+  - pip install torch torchvision numpy scipy opencv-python tqdm runway-python unzip
   - wget -O assets/checkpoints.zip "https://download.impersonator.org/iper_plus_plus_latest_checkpoints.zip"
   - unzip -o assets/checkpoints.zip -d assets/
   - rm assets/checkpoints.zip
