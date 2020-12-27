@@ -5,10 +5,10 @@ spec:
   gpu: True
   cpu: False
 build_steps:
-  # - apt-get update
-  # - apt-get install -y libboost-all-dev
-  # - apt-get install -y cmake
-  # - apt-get install ffmpeg libsm6 libxext6  -y
+  - apt-get update
+  - apt-get install -y libboost-all-dev
+  - apt-get install -y cmake
+  - apt-get install ffmpeg libsm6 libxext6  -y
   - apt-get install zip unzip
   - python -m pip install torch==1.7.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
   - python -m pip install torchvision==0.8.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
