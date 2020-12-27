@@ -12,6 +12,7 @@ build_steps:
   - apt-get install zip unzip
   - pip install torch torchvision mmcv-full runway-python
   - python setup.py develop
+  - pip install neural_renderer_pytorch
   - python -m pip install git+https://github.com/iPERDance/neural_renderer.git@e5f54f71a8941acf372514eb92e289872f272653
   # - pip install git+https://github.com/open-mmlab/mmdetection.git@8179440ec5f75fe95484854af61ce6f6279f3bbc
   # - pip install git+https://github.com/open-mmlab/mmediting@d4086aaf8a36ae830f1714aad585900d24ad1156
