@@ -10,7 +10,7 @@ build_steps:
   - apt-get install -y cmake
   - apt-get install ffmpeg libsm6 libxext6  -y
   - apt-get install zip unzip
-  - pip install torch torchvision numpy scipy opencv-python tqdm runway-python mmcv-full==1.2.0+torch1.7.0+cu101 toml>=0.10.2
+  - pip install torch torchvision numpy scipy opencv-python tqdm runway-python mmcv-full toml scikit-image easydict
   - pip install git+https://github.com/open-mmlab/mmdetection.git@8179440ec5f75fe95484854af61ce6f6279f3bbc
   - pip install git+https://github.com/open-mmlab/mmediting@d4086aaf8a36ae830f1714aad585900d24ad1156
   - pip install git+https://github.com/iPERDance/neural_renderer.git@e5f54f71a8941acf372514eb92e289872f272653
