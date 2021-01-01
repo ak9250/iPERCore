@@ -12,7 +12,7 @@ build_steps:
   - apt-get install zip unzip
   - pip install runway-python
   - conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch
-  - pip install mmcv-full=={mmcv_version} -f https://download.openmmlab.com/mmcv/dist/cu92/torch1.4.0/index.html
+  - pip install mmcv-full==1.2.0 -f https://download.openmmlab.com/mmcv/dist/cu92/torch1.4.0/index.html
   - python setup.py develop
   - wget -O assets/checkpoints.zip "https://download.impersonator.org/iper_plus_plus_latest_checkpoints.zip"
   - unzip -o assets/checkpoints.zip -d assets/
