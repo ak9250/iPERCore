@@ -7,8 +7,6 @@ import platform
 import argparse
 import time
 import sys
-from IPython.display import HTML
-from base64 import b64encode
 from iPERCore.services.run_imitator import run_imitator
 import subprocess
 from subprocess import call
