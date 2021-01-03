@@ -5,7 +5,7 @@ spec:
   gpu: True
   cpu: False
 build_steps:
-  - find / -type d -name cuda 2>/dev/null
+  - ls
   # - apt-get update
   # - apt-get install -y libboost-all-dev
   # - apt-get install -y cmake
