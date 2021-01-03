@@ -1,36 +1,22 @@
 import runway
 import numpy as np
+import shutil
 import os
 import os.path as osp
 import platform
 import argparse
 import time
 import sys
+from IPython.display import HTML
+from base64 import b64encode
+from iPERCore.services.run_imitator import run_imitator
 import subprocess
-from iPERCore.services import run_imitator
+from subprocess import call
+from PIL import Image
+import shutil
 
-# the gpu ids
-gpu_ids = "0"
 
-# the image size
-image_size = 512
 
-# the default number of source images, it will be updated if the actual number of sources <= num_source
-num_source = 2
-
-# the assets directory. This is very important, please download it from `one_drive_url` firstly.
-assets_dir = "/content/iPERCore/assets"
-
-# the output directory.
-output_dir = "./results"
-
-# the model id of this case. This is a random model name.
-# model_id = "model_" + str(time.time())
-
-# # This is a specific model name, and it will be used if you do not change it.
-# model_id = "axing_1"
-
-# symlink from the actual assets directory to this current directory
 work_asserts_dir = os.path.join("./assets")
 if not os.path.exists(work_asserts_dir):
     os.symlink(osp.abspath(assets_dir), osp.abspath(work_asserts_dir),
@@ -39,28 +25,49 @@ if not os.path.exists(work_asserts_dir):
 cfg_path = osp.join(work_asserts_dir, "configs", "deploy.toml")
 
 
-def tensor2np(img_tensor):
-    img = (img_tensor[0].cpu().numpy().transpose(1, 2, 0) + 1) / 2
-    img = (img * 255).astype(np.uint8)
-    return img
-# This is a specific model name, and it will be used if you do not change it. This is the case of `trump`
-model_id = "donald_trump_2"
-
-# the source input information, here \" is escape character of double duote "
-
+def run_cmd(command):
+    try:
+        print(command)
+        call(command, shell=True)
+    except KeyboardInterrupt:
+        print("Process interrupted")
+        sys.exit(1)
+    
 
 @runway.command('imitate', inputs={'source': runway.image, 'target': runway.image}, outputs={'image': runway.image})
 def imitate(models, inputs):
-    run_imitator()
-    _, imitator = models
-    imitator.personalize(np.array(inputs['source']))
-    tgt_imgs = [np.array(inputs['target'])]
-    res = imitator.inference(tgt_imgs, cam_strategy='target')
-    img = res[0]
-    img = (img + 1) / 2.0 * 255
-    img = img.astype(np.uint8)
-    return img
+  os.makedirs('images', exist_ok=True)
+  inputs['source'].save('images/temp1.jpg')
+  inputs['target'].save('images/temp2.jpg')
 
+  paths1 = os.path.join('images','temp1.jpg')
+  paths2 = os.path.join('images','temp2.jpg')
+
+  src_path = "./images/temp1.jpg"
+
+  ref_path = "./images/temp2.jpg"
+
+  counter = 0
+  trump = 0
+  akun = 0
+  stage_1_command = ("python -m iPERCore.services.run_imitator"
+            + " --gpu_ids 0"
+            + " --num_source 2"
+            + " --image_size  512"
+            + " --output_dir ./results"
+            + " --model_id donald_trump_"
+            + str(counter)
+            + " --cfg_path "
+            + cfg_path
+            + " --src_path path?=/content/iPERCore/images/temp1.jpg,name?=donald_trump_"
+            + str(trump)
+            + " --ref_path path?=/content/iPERCore/images/temp2.jpg,name?=akun_"+str(akun)+",pose_fc?=300"
+  )      
+  run_cmd(stage_1_command)
+  path = "./results/primitives/donald_trump_"+str(counter)+"/synthesis/imitations/donald_trump_"+str(trump)+"-akun_"+str(akun)+"/pred_00000000.png"
+  img = Image.open(open(path, 'rb'))
+  shutil.rmtree('./results/')
+  return img
 
 if __name__ == '__main__':
     runway.run()
