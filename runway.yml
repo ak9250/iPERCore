@@ -1,6 +1,6 @@
 entrypoint: python runway_model.py
 python: 3.6
-cuda: 9.2
+cuda: 10.2
 spec:
   gpu: True
   cpu: False
@@ -11,12 +11,6 @@ build_steps:
   - apt-get install ffmpeg libsm6 libxext6  -y
   - apt-get install zip unzip
   - pip install runway-python
-  - python3 
-  - import os
-  - os.environ["CUDA_HOME"] = "/usr/local/cuda-10.2"
-  - exit()
-  - conda install pytorch==1.4.0 torchvision==0.5.0 cudatoolkit=9.2 -c pytorch
-  - pip install mmcv-full==1.2.0 -f https://download.openmmlab.com/mmcv/dist/cu92/torch1.4.0/index.html
   - python setup.py develop
   - wget -O assets/checkpoints.zip "https://download.impersonator.org/iper_plus_plus_latest_checkpoints.zip"
   - unzip -o assets/checkpoints.zip -d assets/

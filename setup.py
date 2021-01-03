@@ -6,6 +6,7 @@ import subprocess
 import sys
 import re
 
+os.environ["CUDA_HOME"] = "/usr/local/cuda-10.2"
 
 TORCH_DIST = "https://download.pytorch.org/whl/torch_stable.html"
 MMCV_DIST = "https://download.openmmlab.com/mmcv/dist/index.html"
@@ -259,7 +260,7 @@ def parse_requirements(fname="requirements.txt", with_version=True):
 
 
 # 1. install torch, torchvision, and mmcv firstly.
-# torch_torchvision_mmcv = platform_dependencies()
+torch_torchvision_mmcv = platform_dependencies()
 
 # 2. other installed requires
 install_requires = parse_requirements("requirements/runtime.txt")
@@ -267,7 +268,7 @@ install_requires = parse_requirements("requirements/runtime.txt")
 build_requiers = parse_requirements("requirements/build.txt")
 
 # 4. pip install all of them
-all_requires = [[f"pip=={PIP_VERSION}"]] + install_requires + build_requiers
+all_requires = [[f"pip=={PIP_VERSION}"]] + torch_torchvision_mmcv + install_requires + build_requiers
 
 pip_executable = [sys.executable, "-m", "pip", "install"]
 
@@ -279,7 +280,6 @@ for package_line in all_requires:
 
     print(" ".join(pip_install_line))
     subprocess.run(pip_install_line)
-
 
 
 # 5. setup iPERCore

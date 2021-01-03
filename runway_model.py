@@ -59,9 +59,9 @@ def imitate(models, inputs):
             + str(counter)
             + " --cfg_path "
             + cfg_path
-            + " --src_path path?=/content/iPERCore/images/temp1.jpg,name?=donald_trump_"
+            + " --src_path path?=./images/temp1.jpg,name?=donald_trump_"
             + str(trump)
-            + " --ref_path path?=/content/iPERCore/images/temp2.jpg,name?=akun_"+str(akun)+",pose_fc?=300"
+            + " --ref_path path?=./images/temp2.jpg,name?=akun_"+str(akun)+",pose_fc?=300"
   )      
   run_cmd(stage_1_command)
   path = "./results/primitives/donald_trump_"+str(counter)+"/synthesis/imitations/donald_trump_"+str(trump)+"-akun_"+str(akun)+"/pred_00000000.png"
