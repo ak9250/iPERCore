@@ -64,7 +64,7 @@ def imitate(models, inputs):
   run_cmd(stage_1_command)
   path = "./results/primitives/donald_trump_"+str(counter)+"/synthesis/imitations/donald_trump_"+str(trump)+"-akun_"+str(akun)+"/pred_00000000.png"
   img = Image.open(open(path, 'rb'))
-  shutil.rmtree('./results/')
+#   shutil.rmtree('./results/')
   return img
 
 if __name__ == '__main__':
