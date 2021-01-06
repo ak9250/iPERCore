@@ -51,7 +51,7 @@ def imitate(models, inputs):
   stage_1_command = ("python -m iPERCore.services.run_imitator"
             + " --gpu_ids 0"
             + " --num_source 2"
-            + " --image_size  512"
+            + " --image_size  256"
             + " --output_dir ./results"
             + " --model_id donald_trump_"
             + str(counter)
