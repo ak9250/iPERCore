@@ -13,8 +13,6 @@ from subprocess import call
 from PIL import Image
 import shutil
 
-
-
 work_asserts_dir = os.path.join("./assets")
 if not os.path.exists(work_asserts_dir):
     os.symlink(osp.abspath(assets_dir), osp.abspath(work_asserts_dir),
